@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e04affe099c69a91b738ef50bf68b777",
+    "hash": "1945252858b2ea84ec1a1e2c070032d0",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -763,16 +763,16 @@
         },
         {
             "name": "doctrine/mongodb-odm",
-            "version": "dev-master",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "c3933ad5eb0c23e7262f60efa1ad12605484bf48"
+                "reference": "3f135950bbf31e72f544238acd9f0ce2084a1073"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/c3933ad5eb0c23e7262f60efa1ad12605484bf48",
-                "reference": "c3933ad5eb0c23e7262f60efa1ad12605484bf48",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/3f135950bbf31e72f544238acd9f0ce2084a1073",
+                "reference": "3f135950bbf31e72f544238acd9f0ce2084a1073",
                 "shasum": ""
             },
             "require": {
@@ -841,20 +841,20 @@
                 "odm",
                 "persistence"
             ],
-            "time": "2015-08-31 15:19:10"
+            "time": "2015-08-31 14:34:50"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
-            "version": "dev-master",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineMongoDBBundle.git",
-                "reference": "42565f1511d0cae687319e0479b9628aa963589c"
+                "reference": "8ac34a2b62ecbe2e6d79697de6a02cdcb8613198"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMongoDBBundle/zipball/42565f1511d0cae687319e0479b9628aa963589c",
-                "reference": "42565f1511d0cae687319e0479b9628aa963589c",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMongoDBBundle/zipball/8ac34a2b62ecbe2e6d79697de6a02cdcb8613198",
+                "reference": "8ac34a2b62ecbe2e6d79697de6a02cdcb8613198",
                 "shasum": ""
             },
             "require": {
@@ -911,84 +911,7 @@
                 "persistence",
                 "symfony"
             ],
-            "time": "2015-08-31 12:34:24"
-        },
-        {
-            "name": "doctrine/orm",
-            "version": "v2.5.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "e6a83bedbe67579cb0bfb688e982e617943a2945"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/e6a83bedbe67579cb0bfb688e982e617943a2945",
-                "reference": "e6a83bedbe67579cb0bfb688e982e617943a2945",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/cache": "~1.4",
-                "doctrine/collections": "~1.2",
-                "doctrine/common": ">=2.5-dev,<2.6-dev",
-                "doctrine/dbal": ">=2.5-dev,<2.6-dev",
-                "doctrine/instantiator": "~1.0.1",
-                "ext-pdo": "*",
-                "php": ">=5.4",
-                "symfony/console": "~2.5"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0",
-                "satooshi/php-coveralls": "dev-master",
-                "symfony/yaml": "~2.1"
-            },
-            "suggest": {
-                "symfony/yaml": "If you want to use YAML Metadata Mapping Driver"
-            },
-            "bin": [
-                "bin/doctrine",
-                "bin/doctrine.php"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.6.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Doctrine\\ORM\\": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Roman Borschel",
-                    "email": "roman@code-factory.org"
-                },
-                {
-                    "name": "Benjamin Eberlei",
-                    "email": "kontakt@beberlei.de"
-                },
-                {
-                    "name": "Guilherme Blanco",
-                    "email": "guilhermeblanco@gmail.com"
-                },
-                {
-                    "name": "Jonathan Wage",
-                    "email": "jonwage@gmail.com"
-                }
-            ],
-            "description": "Object-Relational-Mapper for PHP",
-            "homepage": "http://www.doctrine-project.org",
-            "keywords": [
-                "database",
-                "orm"
-            ],
-            "time": "2015-08-31 12:59:39"
+            "time": "2015-08-31 13:07:17"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1917,10 +1840,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "doctrine/mongodb-odm": 20,
-        "doctrine/mongodb-odm-bundle": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
