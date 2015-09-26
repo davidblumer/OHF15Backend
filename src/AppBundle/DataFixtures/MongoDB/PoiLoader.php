@@ -5,7 +5,7 @@
  *
  */
 
-namespace AppBundle\DataFixtures\ODM;
+namespace AppBundle\DataFixtures\MongoDB;
 
 use AppBundle\Document\Geo;
 use AppBundle\Document\Poi;
