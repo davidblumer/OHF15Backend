@@ -29,7 +29,7 @@ class PoiLoader implements FixtureInterface
         $tag4 = new Tag('tag4');
 
         $poi1 = new Poi(new PoiType('type1'), new Geo(0,0), [$tag1, $tag2, $tag3]);
-        $poi2 = new Poi(new PoiType('type2'), new Geo(0,0), [$tag2, $tag3, $tag4]);
+        $poi2 = new Poi(new PoiType('type2'), new Geo(45,45), [$tag2, $tag3, $tag4]);
 
         $manager->persist($poi1);
         $manager->persist($poi2);
