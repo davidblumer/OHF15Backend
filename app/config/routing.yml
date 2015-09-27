@@ -1,3 +1,7 @@
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+tagifai_api:
+    resource: "@AppBundle/Resources/config/routing_api.yml"
+    prefix:   /api

@@ -1,0 +1,11 @@
+mapping:
+  class: AppBundle\Document\Poi
+  aliased_properties:
+    poi_type: type
+  hide_properties: []
+#  included_properties:
+#      - type
+  id_properties:
+    - id
+  urls:
+    self: get_poi ## @Route name
