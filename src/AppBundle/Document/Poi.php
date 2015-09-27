@@ -35,7 +35,7 @@ class Poi
 
     /**
      * @var Geo $geo
-     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Geo")
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Geo", embedded=true)
      */
     private $geo;
 

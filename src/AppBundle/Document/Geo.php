@@ -49,7 +49,7 @@ class Geo
      */
     public function getLat()
     {
-        return $this->lat;
+        return (float)$this->lat;
     }
 
     /**
@@ -57,7 +57,7 @@ class Geo
      */
     public function getLng()
     {
-        return $this->lng;
+        return (float)$this->lng;
     }
 
 }

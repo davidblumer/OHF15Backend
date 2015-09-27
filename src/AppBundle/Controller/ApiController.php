@@ -49,7 +49,7 @@ class ApiController extends FOSRestController
     {
         $repo = $this->get('doctrine_mongodb')->getRepository('AppBundle:Poi');
 
-        return ['poi' => $repo->findInRange(new Geo($lat, $lng), $distance)];
+        return ['pois' => $repo->findInRange(new Geo($lat, $lng), $distance)];
     }
 
 

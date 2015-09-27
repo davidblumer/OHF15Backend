@@ -10,7 +10,9 @@ namespace AppBundle\Document\Repository;
 use AppBundle\Document\Geo;
 use AppBundle\Document\Poi;
 use AppBundle\Document\Tag;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\MongoDB\CursorInterface;
 use Doctrine\ODM\MongoDB\DocumentRepository;
 
 /**
@@ -25,20 +27,27 @@ class PoiRepository extends DocumentRepository
      *
      * @param Geo $geo
      * @param $distance
-     * @return array|Poi[]|null
+     * @return ArrayCollection|Poi[]
      */
     public function findInRange(Geo $geo, $distance)
     {
-        return $this->createQueryBuilder()
-            ->field('geo')
-            ->geoWithinCenter($geo->getLat(), $geo->getLng(), $distance)
-//            ->geoNear($geo->getLat(), $geo->getLng())
-//            ->spherical(true)
-//            ->distanceMultiplier(6378.137)
-            ->eagerCursor(true)
+        $distance = (float)$distance;
+
+        /** @var CursorInterface $cursor */
+        $qb = $this->createQueryBuilder()
+            ->field('geo')->withinCenter($geo->getLat(),$geo->getLng(),$distance)
+//            ->eagerCursor(true)
             ->getQuery()
             ->execute()
         ;
+
+        $result = new ArrayCollection();
+
+        foreach ($qb as $poi) {
+            $result->add($poi);
+        }
+
+        return $result;
     }
 
     /**
@@ -46,10 +55,6 @@ class PoiRepository extends DocumentRepository
      */
     public function findOneByTag(Tag $tag)
     {
-//        $criteria = Criteria::create()
-//            ->where(Criteria::expr()->in('tags', $tag))
-//        ;
-
         return $this->findOneBy(['tags' => $tag]);
     }
 
