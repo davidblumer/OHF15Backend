@@ -39,17 +39,13 @@ class ApiController extends FOSRestController
      * @Rest\Get(path="/pois")
      * @Rest\View()
      *
-     * @Rest\QueryParam(name="lat", requirements="\d+\.\d+")
-     * @Rest\QueryParam(name="lng", requirements="\d+\.\d+")
-     * @Rest\QueryParam(name="distance", requirements="\d+\.\d+")
-     *
      * @return array
      */
-    public function getPoisAction($lat, $lng, $distance)
+    public function getPoisAction()
     {
         $repo = $this->get('doctrine_mongodb')->getRepository('AppBundle:Poi');
 
-        return ['pois' => $repo->findInRange(new Geo($lat, $lng), $distance)];
+        return ['pois' => $repo->findAll()];
     }
 
 

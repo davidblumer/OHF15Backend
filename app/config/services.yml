@@ -18,3 +18,8 @@ services:
     app.poi.type_resolver:
         class: AppBundle\Resolver\PoiTypeResolver
         arguments: [ @app.poi.repository ]
+
+    app.listener.cors:
+        class: AppBundle\EventListener\CorsListener
+        tags:
+            - { name: kernel.event_subscriber }
