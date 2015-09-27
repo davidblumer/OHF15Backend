@@ -18,15 +18,15 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
  */
 class Tag
 {
+   
     /**
      * @ODM\String()
      * @var string $name
      */
     protected $name;
+    
+    public function __construct($name) {
+        $this->name = $name;
+    }
 
-    /**
-     * @ODM\Float()
-     * @var float
-     */
-    protected $weight;
 }
