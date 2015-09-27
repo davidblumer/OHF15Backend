@@ -9,6 +9,8 @@ namespace AppBundle\Document\Repository;
 
 use AppBundle\Document\Geo;
 use AppBundle\Document\Poi;
+use AppBundle\Document\Tag;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ODM\MongoDB\DocumentRepository;
 
 /**
@@ -27,13 +29,32 @@ class PoiRepository extends DocumentRepository
      */
     public function findInRange(Geo $geo, $distance)
     {
-        return $this->dm->createQueryBuilder()
+        return $this->createQueryBuilder()
             ->field('geo')
-            ->geoNear($geo->getLat(), $geo->getLng())
-            ->spherical(true)
-            ->distanceMultiplier(6378.137)
+            ->geoWithinCenter($geo->getLat(), $geo->getLng(), $distance)
+//            ->geoNear($geo->getLat(), $geo->getLng())
+//            ->spherical(true)
+//            ->distanceMultiplier(6378.137)
+            ->eagerCursor(true)
             ->getQuery()
             ->execute()
         ;
+    }
+
+    /**
+     * @param string $tag
+     */
+    public function findOneByTag(Tag $tag)
+    {
+//        $criteria = Criteria::create()
+//            ->where(Criteria::expr()->in('tags', $tag))
+//        ;
+
+        return $this->findOneBy(['tags' => $tag]);
+    }
+
+    public function findByTag(Tag $tag)
+    {
+        return $this->findBy(['tags' => $tag]);
     }
 }

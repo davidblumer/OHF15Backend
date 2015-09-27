@@ -7,3 +7,14 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    app.poi.repository:
+        class: AppBundle\Document\Repository\PoiRepository
+        factory_service: doctrine.odm.mongodb.document_manager
+        factory_method: getRepository
+        arguments: [ 'AppBundle:Poi' ]
+        public: false
+
+    app.poi.type_resolver:
+        class: AppBundle\Resolver\PoiTypeResolver
+        arguments: [ @app.poi.repository ]

@@ -16,7 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @package AppBundle\Document
  * @author Fabian Sabau <fabian.sabau@socialbit.de>
  *
- * @ODM\Document()
+ * @ODM\Document(repositoryClass="AppBundle\Document\Repository\PoiRepository")
+ * @ODM\Index(keys={"geo"="2d"})
  */
 class Poi
 {
