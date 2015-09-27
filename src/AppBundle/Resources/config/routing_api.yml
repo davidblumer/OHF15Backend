@@ -1,7 +1,3 @@
 tagifai_api_route:
-    type:        annotation
+    type:        rest
     resource:    AppBundle\Controller\ApiController
-    
-tagifai_import_route:
-    type:        annotation
-    resource:    AppBundle\Controller\ImportController

@@ -20,7 +20,6 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\RestBundle\FOSRestBundle(),
-            new NilPortugues\Symfony2\JsonApiBundle\NilPortuguesSymfony2JsonApiBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

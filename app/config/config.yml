@@ -90,8 +90,24 @@ swiftmailer:
     spool:     { type: memory }
     
 fos_rest:
+    param_fetcher_listener:
+        enabled: true
+        force: true
+    body_listener: true
+#        array_normalizer: fos_rest.normalizer.camel_keys
+    format_listener: true
+#        rules:
+#            - { path: '^/api', fallback_format: json, prefer_extension: false, priorities: ['json', 'xml', 'html'] }
     routing_loader:
-        default_format: json    
+        default_format: json
+        include_format: false
+    view:
+        view_response_listener: force
+    body_converter:
+        enabled: true
+        validate: true
 
-nilportugues_json_api:
-    mappings: "%kernel.root_dir%/config/serializer/"
+sensio_framework_extra:
+    view:    { annotations: false }
+    router:  { annotations: true }
+    request: { converters: true }

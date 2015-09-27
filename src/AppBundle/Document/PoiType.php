@@ -8,6 +8,7 @@
 namespace AppBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Class PoiType
@@ -21,6 +22,7 @@ class PoiType
     /**
      * @ODM\String()
      * @var string $name
+     * @JMS\Type(name="string")
      */
     private $name;
 

@@ -51,11 +51,16 @@ class Poi
      * @param Geo $geo
      * @param Tag[]|ArrayCollection $tags
      */
-    public function __construct(PoiType $type, Geo $geo, array $tags)
+    public function __construct(PoiType $type, Geo $geo, $tags)
     {
         $this->type = $type;
         $this->geo = $geo;
-        $this->tags = new ArrayCollection($tags);
+
+        if (!$tags instanceof ArrayCollection) {
+            $this->tags = new ArrayCollection($tags);
+        }
+
+        $this->tags = $tags;
     }
 
     /**
