@@ -8,6 +8,7 @@
 namespace AppBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Class Geo
@@ -21,12 +22,14 @@ class Geo
     /**
      * @var float $lat
      * @ODM\Float()
+     * @JMS\Type(name="float")
      */
     private $lat;
 
     /**
      * @var float $lng
      * @ODM\Float()
+     * @JMS\Type(name="float")
      */
     private $lng;
 

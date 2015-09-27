@@ -2,89 +2,86 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Api\PoiRequest;
+use AppBundle\Document\Geo;
+use AppBundle\Document\Poi;
 use FOS\RestBundle\Controller\FOSRestController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Util\Codes;
+use FOS\RestBundle\View\View;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ApiController extends FOSRestController
 {
-    
+
     /**
-     *  @Rest\Post("/poi")
-     * 
-     */ 
-    public function postPoiAction(Request $request)
-    {
-        
-        $content = $request->getContent();
-        $dm = $this->get('doctrine_mongodb')->getManager();
-        //$poi = $dm->getRepository('AppBundle:Poi')->find(1); 
-       
-        $serializer = $this->get('nil_portugues.serializer.json_api_serializer');
-        
-        $poi = $serializer->unserialize($content);
-        
-        $response = new Response();
-        
-        return $response;
-    }
-    
-    /**
-     *  @Rest\Put("/poi/{id}")
-     * 
-     */ 
-    public function putPoiAction($id)
-    {
-        $dm = $this->get('doctrine_mongodb')->getManager();
-        $poi = $dm->getRepository('AppBundle:Poi')->find($id);
-        
-        $serializer = $this->get('nil_portugues.serializer.json_api_serializer');
- 
-    }
-    
-    /**
-     *  @Rest\Get("/poi/{id}", name="get_poi")
-     * 
-     */ 
+     * @Rest\View()
+     *
+     * @param $id
+     * @return array
+     */
     public function getPoiAction($id)
     {
-        $dm = $this->get('doctrine_mongodb')->getManager();
-        $poi = $dm->getRepository('AppBundle:Poi')->find($id);
-        
-        $serializer = $this->get('nil_portugues.serializer.json_api_serializer');
+        $repo = $this->get('doctrine_mongodb')->getRepository('AppBundle:Poi');
 
-        /** @var \NilPortugues\Api\JsonApi\JsonApiTransformer $transformer */
-        $transformer = $serializer->getTransformer();
-        $transformer->setSelfUrl($this->generateUrl('get_poi', ['id' => $id], true));
-        
-        $response = new Response($serializer->serialize($poi));
-        
-        return $response;
+        $poi = $repo->find($id);
+
+        if (!$poi) {
+            throw new NotFoundHttpException();
+        }
+
+        return ['poi' => $poi];
     }
-    
+
     /**
-     *  @Rest\Get("/pois/{lat}/{lng}/{distance}}", name="get_pois")
-     * 
-     */ 
+     * @Rest\Get(path="/pois")
+     * @Rest\View()
+     *
+     * @Rest\QueryParam(name="lat", requirements="\d+\.\d+")
+     * @Rest\QueryParam(name="lng", requirements="\d+\.\d+")
+     * @Rest\QueryParam(name="distance", requirements="\d+\.\d+")
+     *
+     * @return array
+     */
     public function getPoisAction($lat, $lng, $distance)
     {
-        $geo = new \AppBundle\Document\Geo($lat, $lng);
+        $repo = $this->get('doctrine_mongodb')->getRepository('AppBundle:Poi');
 
-        $dm = $this->get('doctrine_mongodb')->getManager();
-        $pois = $dm->getRepository('AppBundle:Poi')->findInRange($geo, $distance);
-        
-        $serializer = $this->get('nil_portugues.serializer.json_api_serializer');
-
-        /** @var \NilPortugues\Api\JsonApi\JsonApiTransformer $transformer */
-        $transformer = $serializer->getTransformer();
-        $transformer->setSelfUrl($this->generateUrl('get_poi', ['id' => $id], true));
-        
-        $response = new Response($serializer->serialize($poi));
-        
-        return $response;
+        return ['poi' => $repo->findInRange(new Geo($lat, $lng), $distance)];
     }
-            
+
+
+    /**
+     * @Rest\View()
+     * @Rest\Post(path="/pois")
+     *
+     * @ParamConverter("poiRequest", class="AppBundle\Api\PoiRequest")
+     *
+     * @param PoiRequest $poiRequest
+     * @return View
+     */
+    public function postPoiAction(PoiRequest $poiRequest)
+    {
+        $dm = $this->get('doctrine_mongodb.odm.document_manager');
+        $resolver = $this->get('app.poi.type_resolver');
+
+        $type = $poiRequest->getType();
+
+        if (!$type) {
+            $type = $resolver->resolveType($poiRequest->getTags());
+        }
+
+        if (!$type) {
+            return View::create(null, Codes::HTTP_BAD_REQUEST);
+        }
+
+        $poi = $poiRequest->createPoi($type);
+
+        $dm->persist($poi);
+        $dm->flush();
+    }
+
 
 }

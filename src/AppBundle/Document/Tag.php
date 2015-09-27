@@ -8,6 +8,7 @@
 namespace AppBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Class Tag
@@ -21,12 +22,26 @@ class Tag
     /**
      * @ODM\String()
      * @var string $name
+     * @JMS\Type(name="string")
+     *
      */
     protected $name;
 
     /**
-     * @ODM\Float()
-     * @var float
+     * Tag constructor.
+     * @param string $name
      */
-    protected $weight;
+    public function __construct($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
 }

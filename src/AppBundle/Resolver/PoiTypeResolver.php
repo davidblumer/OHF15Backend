@@ -33,7 +33,7 @@ class PoiTypeResolver
         $this->poiRepository = $poiRepository;
     }
 
-    public function resolveType(array $tags)
+    public function resolveType($tags)
     {
         $types = array();
 

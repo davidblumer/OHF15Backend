@@ -20,18 +20,14 @@
         "incenteev/composer-parameter-handler": "~2.0",
 
         "doctrine/doctrine-fixtures-bundle": "^2.2",
-        "liip/functional-test-bundle": "^1.2",
-        "friendsofsymfony/rest-bundle": "^1.7",
-        "jms/serializer-bundle": "^1.0",
-        "nilportugues/jsonapi-bundle": "^1.0",
 
         "friendsofsymfony/rest-bundle": "^1.7",
-        "jms/serializer-bundle": "^1.0",
-        "nilportugues/jsonapi-bundle": "^1.0"
+        "jms/serializer-bundle": "^1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
-        "phpunit/phpunit": "^4.8"
+        "phpunit/phpunit": "^4.8",
+        "liip/functional-test-bundle": "^1.2"
     },
     "scripts": {
         "post-install-cmd": [
